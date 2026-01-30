@@ -1,0 +1,223 @@
+export interface Job {
+  id: string;
+  title: string;
+  company: string;
+  companyLogo: string;
+  location: string;
+  type: 'Full-time' | 'Part-time' | 'Contract' | 'Remote';
+  experience: string;
+  salary?: string;
+  tags: string[];
+  description: string;
+  responsibilities: string[];
+  qualifications: string[];
+  benefits: string[];
+  postedAt: string;
+}
+
+export const jobs: Job[] = [
+  {
+    id: '1',
+    title: 'Senior Frontend Engineer',
+    company: 'TechVision Inc.',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=techvision',
+    location: 'San Francisco, CA',
+    type: 'Full-time',
+    experience: '5+ years',
+    salary: '$150k - $200k',
+    tags: ['React', 'TypeScript', 'Node.js', 'GraphQL'],
+    description: 'We are looking for a Senior Frontend Engineer to join our growing team. You will be responsible for building and maintaining our customer-facing web applications, working closely with designers and backend engineers to deliver exceptional user experiences.',
+    responsibilities: [
+      'Lead the development of complex frontend features',
+      'Mentor junior developers and conduct code reviews',
+      'Collaborate with product and design teams to define requirements',
+      'Optimize application performance and scalability',
+      'Contribute to architectural decisions and technical strategy',
+    ],
+    qualifications: [
+      '5+ years of experience with React and TypeScript',
+      'Strong understanding of web technologies and browser APIs',
+      'Experience with state management solutions (Redux, Zustand)',
+      'Familiarity with testing frameworks (Jest, Cypress)',
+      'Excellent communication and collaboration skills',
+    ],
+    benefits: [
+      'Competitive salary and equity package',
+      'Comprehensive health, dental, and vision insurance',
+      'Flexible work hours and remote-friendly culture',
+      '401(k) matching program',
+      'Annual learning and development budget',
+    ],
+    postedAt: '2 days ago',
+  },
+  {
+    id: '2',
+    title: 'Full Stack Developer',
+    company: 'CloudScale Solutions',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=cloudscale',
+    location: 'Remote',
+    type: 'Remote',
+    experience: '3-5 years',
+    salary: '$120k - $160k',
+    tags: ['Python', 'Django', 'React', 'PostgreSQL', 'AWS'],
+    description: 'Join our team as a Full Stack Developer and help us build scalable cloud-native applications. You will work across the entire stack, from designing APIs to crafting beautiful user interfaces.',
+    responsibilities: [
+      'Design and implement RESTful APIs and microservices',
+      'Build responsive and accessible frontend interfaces',
+      'Write clean, maintainable, and well-tested code',
+      'Participate in agile development processes',
+      'Debug and resolve production issues',
+    ],
+    qualifications: [
+      '3+ years of full-stack development experience',
+      'Proficiency in Python and JavaScript/TypeScript',
+      'Experience with Django or similar backend frameworks',
+      'Knowledge of SQL databases and query optimization',
+      'Familiarity with cloud platforms (AWS, GCP, Azure)',
+    ],
+    benefits: [
+      'Fully remote work environment',
+      'Flexible PTO policy',
+      'Home office stipend',
+      'Professional development opportunities',
+      'Team retreats twice a year',
+    ],
+    postedAt: '1 week ago',
+  },
+  {
+    id: '3',
+    title: 'Machine Learning Engineer',
+    company: 'DataMind AI',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=datamind',
+    location: 'New York, NY',
+    type: 'Full-time',
+    experience: '4+ years',
+    salary: '$170k - $220k',
+    tags: ['Python', 'TensorFlow', 'PyTorch', 'NLP', 'MLOps'],
+    description: 'We are seeking a talented Machine Learning Engineer to develop and deploy AI models that power our intelligent automation platform. You will work with cutting-edge technology to solve complex business problems.',
+    responsibilities: [
+      'Design and train machine learning models for production',
+      'Build and maintain ML pipelines and infrastructure',
+      'Collaborate with data scientists on research projects',
+      'Optimize model performance and reduce latency',
+      'Stay current with latest ML research and techniques',
+    ],
+    qualifications: [
+      '4+ years of ML engineering experience',
+      'Strong programming skills in Python',
+      'Experience with deep learning frameworks',
+      'Knowledge of NLP and computer vision',
+      'Familiarity with MLOps tools and practices',
+    ],
+    benefits: [
+      'Competitive compensation package',
+      'Stock options',
+      'Unlimited vacation policy',
+      'Premium health benefits',
+      'Conference attendance sponsorship',
+    ],
+    postedAt: '3 days ago',
+  },
+  {
+    id: '4',
+    title: 'DevOps Engineer',
+    company: 'InfraCore Systems',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=infracore',
+    location: 'Austin, TX',
+    type: 'Full-time',
+    experience: '3+ years',
+    salary: '$130k - $170k',
+    tags: ['Kubernetes', 'Docker', 'Terraform', 'CI/CD', 'Linux'],
+    description: 'We are looking for a DevOps Engineer to help us build and maintain our cloud infrastructure. You will be instrumental in improving our deployment processes and system reliability.',
+    responsibilities: [
+      'Manage and scale Kubernetes clusters',
+      'Implement infrastructure as code using Terraform',
+      'Design and maintain CI/CD pipelines',
+      'Monitor system health and respond to incidents',
+      'Automate operational tasks and workflows',
+    ],
+    qualifications: [
+      '3+ years of DevOps or SRE experience',
+      'Strong knowledge of container orchestration',
+      'Experience with cloud platforms (AWS/GCP)',
+      'Proficiency in scripting (Bash, Python)',
+      'Understanding of networking and security best practices',
+    ],
+    benefits: [
+      'Competitive salary',
+      'Hybrid work model',
+      'Health and wellness programs',
+      'Professional certification support',
+      'Generous parental leave',
+    ],
+    postedAt: '5 days ago',
+  },
+  {
+    id: '5',
+    title: 'Product Designer',
+    company: 'DesignForward',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=designforward',
+    location: 'Los Angeles, CA',
+    type: 'Full-time',
+    experience: '4+ years',
+    salary: '$120k - $160k',
+    tags: ['Figma', 'UI/UX', 'Design Systems', 'Prototyping', 'User Research'],
+    description: 'Join our design team to create beautiful and intuitive user experiences. You will work closely with product managers and engineers to bring ideas to life.',
+    responsibilities: [
+      'Lead end-to-end design for key product features',
+      'Create wireframes, prototypes, and high-fidelity designs',
+      'Conduct user research and usability testing',
+      'Contribute to and maintain design systems',
+      'Collaborate across teams to ensure design consistency',
+    ],
+    qualifications: [
+      '4+ years of product design experience',
+      'Strong portfolio demonstrating UI/UX skills',
+      'Proficiency in Figma and design tools',
+      'Experience with design systems',
+      'Excellent visual design sensibility',
+    ],
+    benefits: [
+      'Creative work environment',
+      'Latest design tools and equipment',
+      'Regular design team workshops',
+      'Flexible working hours',
+      'Comprehensive benefits package',
+    ],
+    postedAt: '1 day ago',
+  },
+  {
+    id: '6',
+    title: 'Backend Engineer',
+    company: 'FinTech Pro',
+    companyLogo: 'https://api.dicebear.com/7.x/shapes/svg?seed=fintechpro',
+    location: 'Chicago, IL',
+    type: 'Full-time',
+    experience: '4-6 years',
+    salary: '$140k - $180k',
+    tags: ['Java', 'Spring Boot', 'Microservices', 'Kafka', 'Redis'],
+    description: 'We are looking for a Backend Engineer to build robust and scalable financial services. You will work on high-performance systems that process millions of transactions daily.',
+    responsibilities: [
+      'Design and implement microservices architecture',
+      'Build APIs for internal and external consumption',
+      'Ensure system reliability and performance',
+      'Write comprehensive tests and documentation',
+      'Participate in on-call rotation',
+    ],
+    qualifications: [
+      '4+ years of backend development experience',
+      'Strong proficiency in Java and Spring ecosystem',
+      'Experience with message queues and caching',
+      'Knowledge of distributed systems',
+      'Familiarity with financial regulations is a plus',
+    ],
+    benefits: [
+      'Industry-leading compensation',
+      'Performance bonuses',
+      'Premium healthcare coverage',
+      'Retirement savings plan',
+      'Career advancement opportunities',
+    ],
+    postedAt: '4 days ago',
+  },
+];
