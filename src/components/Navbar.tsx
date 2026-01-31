@@ -58,14 +58,16 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
-          >
-            <User className="w-4 h-4" />
-            Sign In
-          </motion.button>
+          <Link to="/signin">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+            >
+              <User className="w-4 h-4" />
+              Sign In
+            </motion.button>
+          </Link>
         </div>
       </div>
     </motion.header>

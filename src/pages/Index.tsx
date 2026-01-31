@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
-import { Search, Filter, Sparkles, TrendingUp, Users, Target } from 'lucide-react';
+import { Search, Sparkles, TrendingUp, Users, Target } from 'lucide-react';
 import { useState } from 'react';
 import { JobCard } from '@/components/JobCard';
 import { Navbar } from '@/components/Navbar';
 import { jobs } from '@/data/jobs';
+import { FilterPopover, FilterState } from '@/components/FilterPopover';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterState | null>(null);
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch =
@@ -15,8 +17,35 @@ const Index = () => {
       job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesType = !selectedType || job.type === selectedType;
-    return matchesSearch && matchesType;
+    
+    // Apply advanced filters
+    let matchesFilters = true;
+    if (filters) {
+      if (filters.locations.length > 0) {
+        matchesFilters = matchesFilters && filters.locations.some((loc) => job.location.includes(loc) || (loc === 'Remote' && job.type === 'Remote'));
+      }
+      if (filters.experience.length > 0) {
+        matchesFilters = matchesFilters && filters.experience.some((exp) => job.experience.toLowerCase().includes(exp.toLowerCase().replace(' years', '').replace('+', '')));
+      }
+      if (job.salary) {
+        const salaryMatch = job.salary.match(/\$(\d+)k/);
+        if (salaryMatch) {
+          const minSalary = parseInt(salaryMatch[1]);
+          matchesFilters = matchesFilters && minSalary >= filters.salaryRange[0] && minSalary <= filters.salaryRange[1];
+        }
+      }
+    }
+    
+    return matchesSearch && matchesType && matchesFilters;
   });
+
+  const handleApplyFilters = (newFilters: FilterState) => {
+    setFilters(newFilters);
+  };
+
+  const handleClearFilters = () => {
+    setFilters(null);
+  };
 
   const jobTypes = ['Full-time', 'Remote', 'Contract', 'Part-time'];
 
@@ -69,9 +98,9 @@ const Index = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                 />
-                <button className="absolute right-2 p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
-                  <Filter className="w-5 h-5 text-muted-foreground" />
-                </button>
+                <div className="absolute right-2">
+                  <FilterPopover onApplyFilters={handleApplyFilters} onClearFilters={handleClearFilters} />
+                </div>
               </div>
             </motion.div>
           </motion.div>

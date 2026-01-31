@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import { 
   Briefcase, 
   TrendingUp, 
-  Clock, 
   Target,
   ChevronRight,
   Star,
   Calendar,
   BarChart3,
-  BookOpen,
   Sparkles,
-  CheckCircle2,
   ArrowUpRight
 } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
@@ -257,14 +254,6 @@ const Dashboard = () => {
                   <Briefcase className="w-5 h-5 text-primary" />
                   <span className="text-sm font-medium text-foreground">Browse Jobs</span>
                 </Link>
-                <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary transition-colors w-full text-left">
-                  <BookOpen className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium text-foreground">Practice Interview</span>
-                </button>
-                <button className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary transition-colors w-full text-left">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium text-foreground">View History</span>
-                </button>
               </div>
             </motion.div>
           </div>

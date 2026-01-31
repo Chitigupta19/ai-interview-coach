@@ -10,6 +10,7 @@ import ResumeUpload from "./pages/ResumeUpload";
 import InterviewRoom from "./pages/InterviewRoom";
 import InterviewResults from "./pages/InterviewResults";
 import Dashboard from "./pages/Dashboard";
+import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/interview/:id" element={<InterviewRoom />} />
             <Route path="/results/:id" element={<InterviewResults />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/signin" element={<SignIn />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
