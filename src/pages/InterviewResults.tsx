@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  ArrowLeft, 
   Download, 
   Share2, 
   RotateCcw, 
@@ -18,10 +17,13 @@ import {
 } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { jobs } from '@/data/jobs';
+import { generateReportPDF } from '@/utils/generateReport';
+import { useToast } from '@/hooks/use-toast';
 
 const InterviewResults = () => {
   const { id } = useParams();
   const job = jobs.find((j) => j.id === id);
+  const { toast } = useToast();
 
   const overallScore = 85;
 
@@ -322,7 +324,24 @@ const InterviewResults = () => {
                 <RotateCcw className="w-4 h-4" />
                 Retry Interview
               </Link>
-              <button className="flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium">
+              <button
+                onClick={() => {
+                  generateReportPDF({
+                    jobTitle: job?.title || 'Interview',
+                    company: job?.company || 'Company',
+                    overallScore,
+                    skillScores,
+                    strengths,
+                    improvements,
+                    feedback,
+                  });
+                  toast({
+                    title: 'Report Generated',
+                    description: 'Your interview report is ready for download/print.',
+                  });
+                }}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium"
+              >
                 <Download className="w-4 h-4" />
                 Download Report
               </button>
