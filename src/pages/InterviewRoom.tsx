@@ -7,16 +7,10 @@ import {
   Video, 
   VideoOff, 
   Phone, 
-  Pause, 
-  Play,
-  RotateCcw,
   MessageSquare,
-  Settings,
   Volume2,
   Send,
   Clock,
-  AlertCircle,
-  Sparkles,
   Brain,
   User
 } from 'lucide-react';
@@ -39,7 +33,6 @@ const InterviewRoom = () => {
   
   const [isMicOn, setIsMicOn] = useState(true);
   const [isVideoOn, setIsVideoOn] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
   const [aiStatus, setAiStatus] = useState<AIStatus>('speaking');
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -60,13 +53,11 @@ const InterviewRoom = () => {
 
   // Timer
   useEffect(() => {
-    if (!isPaused) {
-      const timer = setInterval(() => {
-        setTimeElapsed((prev) => prev + 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [isPaused]);
+    const timer = setInterval(() => {
+      setTimeElapsed((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Initialize with first question
   useEffect(() => {
@@ -144,14 +135,14 @@ const InterviewRoom = () => {
         setProgress(100);
         
         setTimeout(() => {
-          navigate(`/results/${id}`);
+          navigate(`/results/${id}`, { state: { duration: timeElapsed } });
         }, 3000);
       }
     }, 2000);
   };
 
   const handleEndInterview = () => {
-    navigate(`/results/${id}`);
+    navigate(`/results/${id}`, { state: { duration: timeElapsed } });
   };
 
   const statusConfig = {
@@ -387,67 +378,27 @@ const InterviewRoom = () => {
       >
         <div className="container py-4">
           <div className="flex items-center justify-between">
-            {/* Timer & Progress */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Clock className="w-4 h-4" />
-                <span className="font-mono text-sm">{formatTime(timeElapsed)}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-muted-foreground">Progress</span>
-                <div className="w-32 h-2 rounded-full bg-secondary overflow-hidden">
-                  <motion.div
-                    className="h-full bg-primary"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </div>
-                <span className="text-xs font-medium text-foreground">{Math.round(progress)}%</span>
-              </div>
+            {/* Timer */}
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Clock className="w-4 h-4" />
+              <span className="font-mono text-sm">{formatTime(timeElapsed)}</span>
             </div>
 
             {/* Center Controls */}
-            <div className="flex items-center gap-3">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsPaused(!isPaused)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium"
-              >
-                {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-                {isPaused ? 'Resume' : 'Pause'}
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-secondary-foreground text-sm font-medium"
-              >
-                <RotateCcw className="w-4 h-4" />
-                Repeat
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleEndInterview}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-destructive text-destructive-foreground text-sm font-medium"
-              >
-                <Phone className="w-4 h-4" />
-                End Interview
-              </motion.button>
-            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleEndInterview}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-destructive text-destructive-foreground text-sm font-medium"
+            >
+              <Phone className="w-4 h-4" />
+              End Interview
+            </motion.button>
 
             {/* Right Controls */}
-            <div className="flex items-center gap-2">
-              <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                <Volume2 className="w-5 h-5 text-muted-foreground" />
-              </button>
-              <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                <Settings className="w-5 h-5 text-muted-foreground" />
-              </button>
-            </div>
+            <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
+              <Volume2 className="w-5 h-5 text-muted-foreground" />
+            </button>
           </div>
         </div>
       </motion.div>
