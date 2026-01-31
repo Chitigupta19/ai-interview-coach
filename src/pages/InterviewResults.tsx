@@ -1,9 +1,7 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Download, 
-  Share2, 
-  RotateCcw, 
   Home,
   CheckCircle2,
   TrendingUp,
@@ -22,8 +20,18 @@ import { useToast } from '@/hooks/use-toast';
 
 const InterviewResults = () => {
   const { id } = useParams();
+  const location = useLocation();
   const job = jobs.find((j) => j.id === id);
   const { toast } = useToast();
+  
+  // Get duration from navigation state or default
+  const duration = (location.state as { duration?: number })?.duration || 0;
+  
+  const formatDuration = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
 
   const overallScore = 85;
 
@@ -203,7 +211,7 @@ const InterviewResults = () => {
                   <Clock className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <p className="text-sm text-muted-foreground">Duration</p>
-                    <p className="font-medium text-foreground">12:34</p>
+                    <p className="font-medium text-foreground">{formatDuration(duration)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -317,13 +325,6 @@ const InterviewResults = () => {
                 <Home className="w-4 h-4" />
                 Go to Dashboard
               </Link>
-              <Link
-                to={`/interview/${id}`}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium"
-              >
-                <RotateCcw className="w-4 h-4" />
-                Retry Interview
-              </Link>
               <button
                 onClick={() => {
                   generateReportPDF({
@@ -344,10 +345,6 @@ const InterviewResults = () => {
               >
                 <Download className="w-4 h-4" />
                 Download Report
-              </button>
-              <button className="flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium">
-                <Share2 className="w-4 h-4" />
-                Share
               </button>
             </div>
           </motion.div>
