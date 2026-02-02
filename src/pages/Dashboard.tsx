@@ -27,12 +27,6 @@ const Dashboard = () => {
     { id: '3', company: 'DataMind AI', role: 'Machine Learning Engineer', date: '2 weeks ago', score: 92 },
   ];
 
-  const skillProgress = [
-    { skill: 'Technical Knowledge', progress: 85, change: '+5' },
-    { skill: 'Communication', progress: 78, change: '+3' },
-    { skill: 'Problem Solving', progress: 90, change: '+8' },
-    { skill: 'Confidence', progress: 72, change: '+2' },
-  ];
 
   const recommendations = [
     { title: 'Practice System Design', description: 'Based on your interviews, improving system design skills could boost your score by 10%' },
@@ -180,40 +174,6 @@ const Dashboard = () => {
 
           {/* Right Column */}
           <div className="space-y-6">
-            {/* Skill Progress */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-card border border-border rounded-xl p-6"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className="w-5 h-5 text-primary" />
-                <h2 className="text-lg font-semibold text-foreground">Skill Progress</h2>
-              </div>
-              <div className="space-y-4">
-                {skillProgress.map((item) => (
-                  <div key={item.skill}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm text-muted-foreground">{item.skill}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-foreground">{item.progress}%</span>
-                        <span className="text-xs text-success">{item.change}</span>
-                      </div>
-                    </div>
-                    <div className="h-2 rounded-full bg-secondary overflow-hidden">
-                      <motion.div
-                        className="h-full bg-primary"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${item.progress}%` }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
             {/* AI Recommendations */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}

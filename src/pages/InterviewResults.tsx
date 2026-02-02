@@ -6,10 +6,8 @@ import {
   CheckCircle2,
   TrendingUp,
   MessageSquare,
-  Brain,
   Target,
   Sparkles,
-  Clock,
   Star,
   AlertTriangle
 } from 'lucide-react';
@@ -180,56 +178,6 @@ const InterviewResults = () => {
               </div>
             </div>
 
-            {/* Skill Breakdown */}
-            <div className="bg-card border border-border rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Skill Breakdown</h3>
-              <div className="space-y-4">
-                {skillScores.map((skill, index) => (
-                  <div key={skill.name}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm text-muted-foreground">{skill.name}</span>
-                      <span className="text-sm font-medium text-foreground">{skill.score}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-secondary overflow-hidden">
-                      <motion.div
-                        className={`h-full ${skill.color}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.score}%` }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="bg-card border border-border rounded-xl p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Interview Stats</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Duration</p>
-                    <p className="font-medium text-foreground">{formatDuration(duration)}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MessageSquare className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Questions Answered</p>
-                    <p className="font-medium text-foreground">5 of 5</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Brain className="w-5 h-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">AI Confidence</p>
-                    <p className="font-medium text-foreground">High</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </motion.div>
 
           {/* Right Column - Feedback */}
